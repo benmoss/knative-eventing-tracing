@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-display
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: benmoss/event_display:latest
+          env:
+            - name: K_CONFIG_TRACING
+              value: '{"backend":"zipkin","debug":"true","zipkin-endpoint":"http://otel-collector.observability.svc.cluster.local:9411/api/v2/spans"}'
