@@ -1,0 +1,22 @@
+apiVersion: sources.knative.dev/v1
+kind: ContainerSource
+metadata:
+  name: heartbeats
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: benmoss/heartbeats:latest
+          name: heartbeats
+          args:
+            - --period=1
+          env:
+            - name: POD_NAME
+              value: "heartbeats"
+            - name: POD_NAMESPACE
+              value: "default"
+            - name: K_CONFIG_TRACING
+              value: '{"backend":"zipkin","debug":"true","sample-rate":"1","zipkin-endpoint":"http://otel-collector.observability:9411/api/v2/spans"}'
+  sink:
+    uri: http://dev.null
