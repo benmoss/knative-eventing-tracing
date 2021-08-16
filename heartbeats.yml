@@ -20,6 +20,6 @@ spec:
               value: '{"backend":"zipkin","debug":"true","zipkin-endpoint":"http://otel-collector.observability:9411/api/v2/spans"}'
   sink:
     ref:
-      apiVersion: serving.knative.dev/v1
-      kind: Service
-      name: event-display
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
