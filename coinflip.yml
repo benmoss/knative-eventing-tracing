@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: coinflip
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: ko://github.com/benmoss/knative-tracing/cmd/coinflip
+          env:
+            - name: OTLP_TRACE_ENDPOINT
+              value: otel-collector.observability:4317

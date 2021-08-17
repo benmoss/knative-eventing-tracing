@@ -7,6 +7,9 @@ spec:
   config: |
     receivers:
       zipkin:
+      otlp:
+        protocols:
+          grpc:
     exporters:
       logging:
       jaeger:
@@ -16,6 +19,6 @@ spec:
     service:
       pipelines:
         traces:
-          receivers: [zipkin]
+          receivers: [zipkin, otlp]
           processors: []
           exporters: [logging, jaeger]

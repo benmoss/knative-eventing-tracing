@@ -1,6 +1,21 @@
 apiVersion: eventing.knative.dev/v1
 kind: Trigger
 metadata:
+  name: heartbeat-to-coinflip
+spec:
+  broker: default
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: coinflip
+  filter:
+    attributes:
+      type: dev.knative.eventing.samples.heartbeat
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
   name: heartbeat-to-eventdisplay
 spec:
   broker: default
@@ -9,3 +24,6 @@ spec:
       apiVersion: serving.knative.dev/v1
       kind: Service
       name: event-display
+  filter:
+    attributes:
+      flip: heads
