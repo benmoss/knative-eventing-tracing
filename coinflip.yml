@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-        - image: ko://github.com/benmoss/knative-tracing/cmd/coinflip
+        - image: benmoss/coinflip:latest
           env:
             - name: OTLP_TRACE_ENDPOINT
               value: otel-collector.observability:4317
