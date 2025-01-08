@@ -12,13 +12,14 @@ spec:
           grpc:
     exporters:
       logging:
-      jaeger:
-        endpoint: "simplest-collector.observability.svc.cluster.local:14250"
-        insecure: true
+      otlp/jaeger:
+        endpoint: "simplest-collector.observability.svc.cluster.local:4317"
+        tls:
+          insecure: true
 
     service:
       pipelines:
         traces:
           receivers: [zipkin, otlp]
           processors: []
-          exporters: [logging, jaeger]
+          exporters: [logging, otlp/jaeger]
